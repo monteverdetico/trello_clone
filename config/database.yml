@@ -1,0 +1,5 @@
+development:
+  adapter: postgresql
+  database: trello_clone
+  pool: 5
+  timeout: 5000
