@@ -1,5 +1,7 @@
+require 'bcrypt'
 class User < ActiveRecord::Base
-  attr_accessible :email, :session_token, :username
+  
+  attr_accessible :email, :session_token, :username, :password
   attr_reader :password
   
   validates :password_digest, :presence => { :message => "Password can't be blank" }

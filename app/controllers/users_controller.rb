@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
+      # TODO: add confirmation email
       self.current_user = @user
       redirect_to root_url
     else

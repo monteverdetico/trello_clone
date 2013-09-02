@@ -1,16 +1,16 @@
 <div class="container">
-	<form method="post" action="<%= new_user_url %>"class="form-signin">
+	<form method="post" action="<%= users_url %>"class="form-signin">
 	  <input
 	     name="authenticity_token"
 	     type="hidden"
 	     value="<%= form_authenticity_token %>">
 			 
 		<h2 class="form-signin-heading">Create Account</h2>
-		<input type="text" class="input-block-level" 
-				   name="user[username]" placeholder="Username">
-		<input type="text" class="input-block-level" 
+		<input type="text" class="form-control" 
+				   name="user[username]" placeholder="Username" autofocus>
+		<input type="text" class="form-control" 
 					 name="user[email]" placeholder="Email address">
-		<input type="password" class="input-block-level" 
+		<input type="password" class="form-control" 
 			   	 name="user[password]" placeholder="Password">
 		<button class="btn btn-large btn-primary" type="submit">Create</button>
 	</form>
