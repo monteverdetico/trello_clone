@@ -3,20 +3,17 @@ window.TrelloClone = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function($content, boards) {
+  initialize: function($content, user_id) {
 		// TODO: write initialize function; what params should it get?
+		
+		var boards = new TrelloClone.Collections.Boards(user_id);
+
+		boards.fetch({
+			success: function(response) {
+				new TrelloClone.Routers.Boards($content, boards);
+				
+				Backbone.history.start();
+			}
+		});
   }
 };
-
-$(function(){
-	
-	// TODO: what data should the app kick-off with?
-	
-	var boards = TrelloClone.Collections.Boards();
-	
-	boards.fetch({
-		success: function(responseData) {
-		  TrelloClone.initialize($(#content), responseData);			
-		}
-	});
-});
