@@ -1,5 +1,5 @@
 <div class="container">
-	<form method="post" action="<%= users_url %>"class="form-signin">
+	<form method="post" action="<%= users_url %>" class="form-signin">
 	  <input
 	     name="authenticity_token"
 	     type="hidden"
@@ -12,22 +12,26 @@
 				<p class="text-danger"><%= message %></p>
 			<% end %>
 		<% end %>
-
-		<label for="user_username">			 
-		<input type="text" class="form-control" 
-				   name="user[username]" placeholder="Username" 
-					 value="<%= @user.username %>" id="user_username" autofocus>			 
-	
-		<label for="user_email">			 					 
-		<input type="text" class="form-control" 
-					 name="user[email]" placeholder="Email address"
-					 value="<%= @user.email %>"
-					 id="user_email">
-					 					 
-		<label for="user_password">			 
-		<input type="password" class="form-control" 
-			   	 name="user[password]" placeholder="Password"
-					 id="user_password">
+		
+		<div class="form-group">
+			<label for="user_username"><small>Username</small>	 
+			<input type="text" class="form-control" 
+					   name="user[username]" placeholder="Username" 
+						 value="<%= @user.username %>" id="user_username" autofocus>			 
+		</div>	
+		<div class="form-group">
+			<label for="user_email"><small>Email</small>			 					 
+			<input type="text" class="form-control" 
+						 name="user[email]" placeholder="Email address"
+						 value="<%= @user.email %>"
+						 id="user_email">
+		</div>		
+		<div class="form-group">			 					 
+			<label for="user_password"><small>Password</small> 
+			<input type="password" class="form-control" 
+				   	 name="user[password]" placeholder="Password"
+						 id="user_password">
+		</div>
 		<button class="btn btn-large btn-primary" type="submit">Create</button>
 	</form>
 	<br>

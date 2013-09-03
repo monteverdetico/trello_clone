@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   validates :password_digest, :presence => { :message => "Password can't be blank" }
   validates :password, :length => { :minimum => 6, :allow_nil => true }
   validates :session_token, :username, :email, :presence => true
-  validates :username, :email, :uniqueness => { :case_sensitive => false}
+  validates :username, :email, :uniqueness => { :case_sensitive => false, 
+                                                :allow_blank => true }
 
   after_initialize :ensure_session_token
   
@@ -41,6 +42,5 @@ class User < ActiveRecord::Base
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
   end
-  
 end
 
