@@ -5,11 +5,9 @@ class User < ActiveRecord::Base
   attr_reader :password
   
   validates :password_digest, :presence => { :message => "Password can't be blank" }
-  
-  # allow nil for after initial account creation
   validates :password, :length => { :minimum => 6, :allow_nil => true }
-  validates :session_token, :presence => true
-  validates :username, :presence => true
+  validates :session_token, :username, :email, :presence => true
+  validates :username, :email, :uniqueness => { :case_sensitive => false}
 
   after_initialize :ensure_session_token
   

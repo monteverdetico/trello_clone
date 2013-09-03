@@ -6,14 +6,18 @@
 	     value="<%= form_authenticity_token %>">
 			 
 		<h2 class="form-signin-heading">Please Sign In</h2>
+		<% if @errors %>
+			<p class="text-danger"><%= @errors %></p>
+		<% end %>
+		<label for="user_username">
 		<input type="text" class="form-control" 
-				   name="user[username]" placeholder="Username">
-		<input type="text" class="form-control" 
-					 name="user[email]" placeholder="Email address">
+				   name="user[username]" placeholder="Username" id="user_username">
+					 
+		<label for="user_password">
 		<input type="password" class="form-control" 
-			   	 name="user[password]" placeholder="Password">
+			   	 name="user[password]" placeholder="Password" id="user_password">
 		<button class="btn btn-large btn-primary" type="submit">Sign In</button>
 	</form>
-	<br>
+	<br>	
 	<p> Don't have an account? <a href="<%= new_user_url %>">Create Account</a>
 </div>
