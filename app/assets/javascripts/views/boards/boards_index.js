@@ -10,16 +10,13 @@ TrelloClone.Views.BoardsIndex = Backbone.View.extend({
 	template: JST['boards/index'],
 	
 	new: function(event) {
-		event.preventDefault();
-		
 		var data = $(event.currentTarget).serializeJSON();
 		var title = data.board.title;
 
 		this.collection.create({
 			title: title
 		});
-		debugger
-		$('#newBoard').modal('hide')
+		
 		// TODO: makes sense to navigate to new board
 	},
 	
