@@ -1,6 +1,7 @@
 class Board < ActiveRecord::Base
   attr_accessible :title, :user_id
   validates :title, :user_id, :presence => true
+  # TODO: add unique :title, :scope => :user_id
   
   belongs_to :user
   

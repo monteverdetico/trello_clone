@@ -4,8 +4,7 @@ class BoardsController < ApplicationController
   
   def create
     @board = Board.new(:title => params[:title], :user_id => params[:user_id])
-    
-    ## is this necessary? if it's created do we need anything in return?
+
     if @board.save
       render :json => @board
     else
@@ -19,11 +18,6 @@ class BoardsController < ApplicationController
   
   def index
     @boards = current_user.boards
-    render :json => @boards
-  end
-  
-  def show
-    @board = current_user.boards.where("id = ?", params[:id])
-    render :show
+    render :index
   end
 end

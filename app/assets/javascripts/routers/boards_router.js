@@ -12,16 +12,14 @@ TrelloClone.Routers.Boards = Backbone.Router.extend({
 	show: function(board_id) {
 		var that = this;
 		var board = that.boards.get(board_id);
-		
-		board.fetch({
-			success: function(response) {
-				var newBoardView = new TrelloClone.Views.BoardShow({
-					model: response
-				});
-		
-				that.$rootEl.html(newBoardView.render().$el);				
-			}
+		// TODO: need validation for unique board name
+		// TODO: swap view?!
+
+		var newBoardView = new TrelloClone.Views.BoardShow({
+			model: board
 		});
+		
+		that.$rootEl.html(newBoardView.render().$el);				
 	},
 	
 	index: function() {

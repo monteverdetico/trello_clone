@@ -15,13 +15,12 @@ TrelloClone.Views.BoardsIndex = Backbone.View.extend({
 		var data = $(event.currentTarget).serializeJSON();
 		var title = data.board.title;
 
-		this.collection.create({title: title});
+		this.collection.create({title: title}, {wait: true});
+		
+		// TODO: uniqueness validation for title?
 		
 		$('#newBoard').modal('hideModal');
-		$('.modal-backdrop').remove();
-		
-		// TODO: might make sense to navigate to new board
-		// TODO: fix collection order to render new
+		$('.modal-backdrop').remove();		
 	},
 	
 	render: function() {
