@@ -14,7 +14,7 @@ TrelloClone.Views.BoardsIndex = Backbone.View.extend({
 		
 		var data = $(event.currentTarget).serializeJSON();
 		var title = data.board.title;
-
+		
 		this.collection.create({title: title}, {wait: true});
 		
 		// TODO: uniqueness validation for title?

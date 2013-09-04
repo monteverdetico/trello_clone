@@ -1,14 +1,73 @@
 <div class="container">
-	<div class="row">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-			    <h3 class="panel-title"><%= board.escape('title') %></h3>
-			  </div>
-			  <div class="panel-body">
-					<div class="row" id="lists">
-				  	<!-- list view goes here -->					
-					</div>
-				</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		    <h3 class="panel-title">
+					<%= board.escape('title') %>
+					<span>
+					  <% if (board.get('lists').length <= 3) { %>
+							<a data-toggle="modal" href="#newList" 
+								 class="btn btn-default btn-sm">
+								 Add List
+							</a>
+						<% } %>							
+					</span>	
+				</h3>
 		</div>
-	</div>		
+	  <div class="panel-body">
+			<div class="row">
+	  		<div class="container" id="list-container">
+					
+				<!-- TODO: fix sortable!! -->
+		  	<% board.get('lists').each(function(list) { %>
+					<div class="col-md-3 clearfix">
+						<div class="list-title">						
+							<div class="list-click" data-id="<%= list.get('id') %>">
+								<%= list.escape('title') %>
+							</div>
+						</div>
+						<ol id="sortable-<%= list.get('id') %>" class="connectedSortable">
+						<% list.get('cards').each(function(card) { %>
+							<li class="ui-state-default"><%= card.escape('body') %></li>
+						<% })%>
+						</ol>
+					</div>					
+		  	<% })%>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+<div class="modal fade" id="newList" tabindex="-1" role="dialog" 
+		 aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" 
+							  aria-hidden="true">&times;</button>
+        <h4 class="modal-title">List Title</h4>
+      </div>
+      <form id="createList">
+				<div class="modal-body">
+					<input type="text" class="form-control" 
+								 placeholder="Name your list..." name="list[title]" autofocus>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" 
+									data-dismiss="modal">Close</button>
+	        <button type="submit" class="btn btn-primary">
+						Save
+					</button>
+	      </div>
+			</form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="application/javascript">
+	$(function(){
+		$("#sortable-1, #sortable-2").sortable({
+			connectWith: ".connectedSortable"
+		}).disableSelection();
+	});
+</script>
