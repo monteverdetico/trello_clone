@@ -4,6 +4,8 @@ class BoardsController < ApplicationController
   
   def create
     @board = Board.new(:title => params[:title], :user_id => params[:user_id])
+    
+    ## is this necessary? if it's created do we need anything in return?
     if @board.save
       render :json => @board
     else
@@ -12,7 +14,7 @@ class BoardsController < ApplicationController
   end
   
   def destroy
-    
+    # TODO: the user that destroys must be the board creator
   end
   
   def index
@@ -21,7 +23,7 @@ class BoardsController < ApplicationController
   end
   
   def show
-    @board = current_user.boards.where("board_id = ?", params[:board_id])
-    render :json => @board
+    @board = current_user.boards.where("id = ?", params[:id])
+    render :show
   end
 end

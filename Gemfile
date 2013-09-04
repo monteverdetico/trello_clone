@@ -10,6 +10,7 @@ gem 'ejs'
 gem 'backbone-on-rails'
 gem 'pry-rails'
 gem 'bcrypt-ruby'
+gem 'rabl'
 
 
 # Gems used only for assets and not required

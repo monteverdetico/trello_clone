@@ -4,9 +4,9 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 	
 	render: function() {
 		var that = this;
-		
+
 		var renderedContent = that.template({
-			boards: that.collection
+			board: that.model
 		});
 		
 		that.$el.html(renderedContent);

@@ -10,7 +10,7 @@ window.TrelloClone = {
 
 		boards.fetch({
 			success: function(response) {
-				new TrelloClone.Routers.Boards($content, boards);
+				router = new TrelloClone.Routers.Boards($content, boards);
 				
 				Backbone.history.start();
 			}
