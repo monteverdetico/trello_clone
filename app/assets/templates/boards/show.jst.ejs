@@ -14,34 +14,7 @@
 				</h3>
 		</div>
 	  <div class="panel-body">
-			<div class="row">
-	  		<div class="container" id="list-container">
-					
-				<!-- TODO: add sortable!! -->
-		  	<% board.get('lists').each(function(list) { %>
-					<div class="col-md-3">
-						<ul class="list-group">
-							<div class="list-group-item active">						
-								<div class="editList" data-id="<%= list.get('id') %>">
-									<%= list.escape('title') %>
-								</div>
-							</div>							
-						<% list.get('cards').each(function(card) { %>
-							<li class="list-group-item"><%= card.escape('body') %></li>
-						<% })%>
-						
-						<!-- TODO: STYLE ME!!! -->
-							<div class="list-group-item">
-								<div id="newCard" data-id="<%= list.get('id') %>">
-									<button type="button" class="btn btn-default btn-sm">
-										create card
-									</button>
-								</div>
-						</div>
-						</ul>
-					</div>					
-		  	<% })%>
-				</div>
+			<div class="row" id="lists">
 			</div>
 		</div>
 	</div>
