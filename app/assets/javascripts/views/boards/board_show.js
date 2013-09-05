@@ -4,13 +4,10 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		var lists = model.get('lists');
 		
 		this.listenTo(lists, "add", this.render);
-		this.listenTo(lists, "change", this.render);
-		// this.listenTo(cards, "add", this.render);
 	},
 	
 	events: {
-		"submit #createList": "createList",
-		"click .editList": "editTitle"
+		"submit #createList": "createList"
 	},
 	
   template: JST['boards/show'],
@@ -30,16 +27,7 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		$('.modal-backdrop').remove();
 		$('body').removeClass('modal-open');									
 	},
-	
-	editTitle: function(event) {
-		var listId = $(event.currentTarget).attr('data-id');
-		var list = this.model.get('lists').get(listId)
 		
-		var editForm = new TrelloClone.Views.ListForm({model: list});
-
-		$(event.currentTarget.parentElement).html(editForm.render().$el);
-	},
-	
 	render: function() {
 		var that = this;
 

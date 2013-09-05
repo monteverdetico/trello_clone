@@ -1,8 +1,24 @@
 TrelloClone.Views.ListsIndex = Backbone.View.extend({
 
-  template: JST['lists/index'],
+  initialize: function() {
+  	this.listenTo(this.model, "change", this.render);
+  },
+	
+	events: {
+  	"click .editList": "editTitle"	
+  },
+	
+	template: JST['lists/index'],
 	
 	className: "col-md-3",
+	
+	editTitle: function(event) {
+		var list = this.model
+		
+		var editForm = new TrelloClone.Views.ListForm({model: list});
+
+		$(event.currentTarget.parentElement).html(editForm.render().$el);
+	},
 	
 	render: function() {
 		var that = this;
