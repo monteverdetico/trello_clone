@@ -18,6 +18,9 @@ TrelloClone.Views.ListForm = Backbone.View.extend({
 	
 	update: function(event) {
 		event.preventDefault();
+		var newTitle = $(event.currentTarget).serializeJSON().list.title;
+				
+		this.model.save({title: newTitle}, {wait: true});
 	}
 
 });
