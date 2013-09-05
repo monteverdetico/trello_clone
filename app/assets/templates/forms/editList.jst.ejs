@@ -1,6 +1,8 @@
-<form id="editList">
-	<label for="list_title">
-	<input type="text" name="list[title]" 
-				 id="list_title" placeholder="<%= list.get('title') %>">
+<form class="form-inline" id="editList">
+	<div class="form-group">
+		<label for="list_title">
+		<input type="text" name="list[title]" 
+					 id="list_title" placeholder="<%= list.get('title') %>" autofocus>
+	</div>
 	<button type="submit" class="btn btn-sm">save</button>
 </form>

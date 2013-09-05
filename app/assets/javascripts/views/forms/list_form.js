@@ -1,5 +1,6 @@
 TrelloClone.Views.ListForm = Backbone.View.extend({
-  template: JST['forms/editList'],
+
+	template: JST['forms/editList'],
 	
 	events: {
 		"submit #editList": "update"
@@ -18,6 +19,7 @@ TrelloClone.Views.ListForm = Backbone.View.extend({
 	
 	update: function(event) {
 		event.preventDefault();
+		
 		var newTitle = $(event.currentTarget).serializeJSON().list.title;
 				
 		this.model.save({title: newTitle}, {wait: true});

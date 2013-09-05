@@ -10,9 +10,10 @@ class ListsController < ApplicationController
   end
   
   def update
-    if List.update(params[:id], params[:list])
-      # TODO: modify json in rabl to parse properly
-      render :json => @
+    @list = List.find(params[:id])
+
+    if @list.update_attributes(params[:list])
+      render :updated_list
     else
       render :json => @list.errors.full_messages, :status => 422
     end  

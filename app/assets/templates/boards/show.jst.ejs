@@ -17,17 +17,17 @@
 			<div class="row">
 	  		<div class="container" id="list-container">
 					
-				<!-- TODO: fix sortable!! -->
+				<!-- TODO: add sortable!! -->
 		  	<% board.get('lists').each(function(list) { %>
-					<div class="col-md-3 clearfix">
-						<div class="list-title">						
-							<div class="list-click" data-id="<%= list.get('id') %>">
-								<%= list.escape('title') %>
-							</div>
-						</div>
-						<ol id="sortable-<%= list.get('id') %>" class="connectedSortable">
+					<div class="col-md-3">
+						<ol class="list-group">
+							<div class="list-group-item active">						
+								<div class="list-click" data-id="<%= list.get('id') %>">
+									<%= list.escape('title') %>
+								</div>
+							</div>							
 						<% list.get('cards').each(function(card) { %>
-							<li class="ui-state-default"><%= card.escape('body') %></li>
+							<li class="list-group-item"><%= card.escape('body') %></li>
 						<% })%>
 						</ol>
 					</div>					

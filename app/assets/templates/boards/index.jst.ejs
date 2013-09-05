@@ -1,18 +1,19 @@
-<div id="create-board">
-	<a data-toggle="modal" href="#newBoard" class="btn btn-default">
-		create board
-	</a>	
-</div>
-<div id="boards">
-<% boards.each(function(board) { %>
-	<p>
-		<a href="#/<%= board.get('id') %>" class="btn btn-link btn-lg">
-			<%= board.escape('title') %>
+<div class="container">
+	<div id="create-board">
+		<a data-toggle="modal" href="#newBoard" class="btn btn-primary btn-sm">
+			new board
+		</a>	
+	</div>
+	<br>
+	<div class="list-group" id="boards">
+	<% boards.each(function(board) { %>
+		<a href="#/<%= board.get('id') %>" class="list-group-item">
+			<%= board.escape('title') %> 
 		</a>
-	</p>
-<% }); %>
+	<% }); %>
 </div>
 
+<div class="container">
 <!-- newBoard Modal -->
 <div class="modal fade" id="newBoard" tabindex="-1" role="dialog" 
 		 aria-labelledby="myModalLabel" aria-hidden="true">
@@ -21,12 +22,13 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" 
 							  aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Board Title</h4>
+        <h4 class="modal-title">Create Board</h4>
       </div>
       <form id="createBoard">
 				<div class="modal-body">
+					<p>Board Title</p>
 					<input type="text" class="form-control" 
-								 placeholder="Board title" name="board[title]" autofocus>
+								 placeholder="untitled board" name="board[title]">
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" 

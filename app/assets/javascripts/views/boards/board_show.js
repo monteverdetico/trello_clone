@@ -9,7 +9,6 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 	
 	events: {
 		"submit #createList": "createList",
-		"submit #editList": "editList",
 		"click .list-click": "editTitle"
 	},
 	
@@ -25,9 +24,10 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		this.model.get('lists').create(
 			{title: title, board_id: board_id},
 			{wait: true});
-			
-		$('#newList').modal('hideModal');
-		$('.modal-backdrop').remove();					
+		
+		$('#newList').modal('hide');
+		$('.modal-backdrop').remove();
+		$('body').removeClass('modal-open');									
 	},
 	
 	editTitle: function(event) {

@@ -18,9 +18,9 @@ TrelloClone.Views.BoardsIndex = Backbone.View.extend({
 		this.collection.create({title: title}, {wait: true});
 		
 		// TODO: uniqueness validation for title?
-		
-		$('#newBoard').modal('hideModal');
-		$('.modal-backdrop').remove();		
+		$('#newBoard').modal('hide');
+		$('.modal-backdrop').remove();
+		$('body').removeClass('modal-open');		
 	},
 	
 	render: function() {
