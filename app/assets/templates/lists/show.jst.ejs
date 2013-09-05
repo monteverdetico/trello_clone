@@ -4,15 +4,15 @@
 		<div class="editList" data-id="<%= list.get('id') %>">
 			<%= list.escape('title') %>
 		</div>
-	</div>							
-<% list.get('cards').each(function(card) { %>
-	<li class="list-group-item"><%= card.escape('body') %></li>
-<% })%>
+	</div>
+	<div class="list-group-item" id="cards">							
+		<!-- card view -->
+	</div>
 
 <!-- TODO: STYLE ME!!! -->
 	<div class="list-group-item">
-		<div id="newCard" data-id="<%= list.get('id') %>">
-			<button type="button" class="btn btn-default btn-sm">
+		<div class="newCard" data-id="<%= list.get('id') %>">
+			<button type="button" class="btn btn-default btn-sm" id="createCard">
 				create card
 			</button>
 		</div>
