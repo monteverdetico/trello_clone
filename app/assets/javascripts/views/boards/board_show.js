@@ -39,7 +39,7 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		
 		that.model.get('lists').each(function(list) {
 
-			var listView = new TrelloClone.Views.ListsIndex({model: list});
+			var listView = new TrelloClone.Views.ListsShow({model: list});
 			
 			that.$('#lists').append(listView.render().$el);
 		});

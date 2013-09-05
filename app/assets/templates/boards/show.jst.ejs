@@ -1,3 +1,4 @@
+<!-- board view -->
 <div class="container">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -13,6 +14,7 @@
 					</span>	
 				</h3>
 		</div>
+		<!-- list views -->
 	  <div class="panel-body">
 			<div class="row" id="lists">
 			</div>
@@ -20,6 +22,7 @@
 	</div>
 </div>
 
+<!-- newList Modal -->
 <div class="modal fade" id="newList" tabindex="-1" role="dialog" 
 		 aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -45,11 +48,3 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<script type="application/javascript">
-	$(function(){
-		$("#sortable-1, #sortable-2").sortable({
-			connectWith: ".connectedSortable"
-		}).disableSelection();
-	});
-</script>
