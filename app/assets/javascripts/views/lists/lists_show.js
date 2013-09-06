@@ -48,7 +48,47 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 			that.$('#cards').append(cardView.render().$el);
 		});
 		
+		that.triggerSortable();
+		
 		return that;
+	},
+	
+	_generatePositions: function(listIds) {
+		var newPositions = {};
+		
+		_.each(listIds, function(listId, i) {
+			newPositions[listId] = i;
+		});
+		
+		return {positions: newPositions}
+	},
+	
+	triggerSortable: function() {
+		var that = this;
+		var hook = that.$el;
+		var $lists = hook.find('#cards');
+
+		var listId = that.model.get('id');
+		var url = "/lists/" + listId + "/positions";
+		
+		$lists.sortable({
+			tolerance: "pointer",
+			update: function(event, ui) {
+				var listIds = $(this).sortable("toArray");
+				var newPositions = that._generatePositions(listIds);
+
+				$.ajax({
+					url: url,
+					data: newPositions,
+					dataType: "json",
+					type: "put",
+					success: function(responseData) {
+						that.model.get("cards").set(responseData, 
+							{silent: true});
+					}							
+				});
+			}
+		});
 	}
 
 });

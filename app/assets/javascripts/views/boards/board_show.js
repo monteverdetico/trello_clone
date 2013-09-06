@@ -65,11 +65,11 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 	
 	triggerSortable: function() {
 		var that = this;
-		var hook = this.$el;
+		var hook = that.$el;
 		var $lists = hook.find('#lists');
 
-		var userId = this.model.get('user_id');
-		var boardId = this.model.get('id');
+		var userId = that.model.get('user_id');
+		var boardId = that.model.get('id');
 		var url = "/users/" + userId + "/boards/" + boardId + "/positions";
 		
 		$lists.sortable({
@@ -90,17 +90,6 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 				});
 			}
 		});
-			
-			
-		// $lists.on("sortchange", function(event, ui) {
-		// 	// make ajax request to custom route that will handle
-		// 	// hash of list id and position
-		// 	// server should handle request and update positions
-		// 	});
-		// 	
-		// 	console.log(that);
-		// 	$lists.sortable("toArray");
-		// });
 	}
 	// THIS IS FOR CARDS
 	// triggerSortable: function() {

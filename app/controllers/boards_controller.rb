@@ -25,8 +25,7 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     @lists = @board.lists
     new_positions = params[:positions]
-    p new_positions
-    # Does this need error handling? Shouldn't be receiving invalid data.
+
     @lists.each do |list|
       list.position = new_positions[list.id.to_s]
       list.save!
