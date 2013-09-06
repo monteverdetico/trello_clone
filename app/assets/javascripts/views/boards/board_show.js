@@ -68,8 +68,6 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 			
 			console.log($lists);
 			$lists.sortable("toArray");
-			
-			// adding a comment
 		});
 	}
 	// THIS IS FOR CARDS
@@ -84,7 +82,4 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 	// 		}).disableSelection();
 	// 	});
 	// }
-
-
-// Added a second comment.
 });
