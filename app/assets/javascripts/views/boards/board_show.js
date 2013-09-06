@@ -69,6 +69,7 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 			console.log($lists);
 			$lists.sortable("toArray");
 			
+			
 		});
 	}
 	// THIS IS FOR CARDS
