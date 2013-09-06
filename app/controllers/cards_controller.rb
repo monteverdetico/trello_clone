@@ -9,4 +9,8 @@ class CardsController < ApplicationController
       render :json => @card.errors.full_messages
     end
   end
+  
+  def update
+    
+  end
 end

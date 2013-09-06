@@ -4,6 +4,7 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		var lists = model.get('lists');
 		
 		this.listenTo(lists, "add", this.render);
+		
 	},
 	
 	events: {
@@ -44,7 +45,36 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 			that.$('#lists').append(listView.render().$el);
 		});
 		
+		that.triggerSortable();
+		
 		return that;
+	},
+	
+	triggerSortable: function() {
+		var hook = this.$el;
+		var $lists = hook.find('#lists');
+		
+		$lists.sortable({
+			tolerance: "pointer"
+		});
+			
+		$lists.on("sortchange", function(event, ui) {
+			console.log($lists);
+			$lists.sortable("toArray");
+			
+		});
 	}
+	// THIS IS FOR CARDS
+	// triggerSortable: function() {
+	// 	var hook = this.$el;
+	// 	
+	// 	this.model.get('lists').each(function(list) {
+	// 		var sortableList = "#list" + list.get('id');
+	// 
+	// 		hook.find(sortableList).sortable({
+	// 			connectWith: ".col-md-3 .connectedSortable"
+	// 		}).disableSelection();
+	// 	});
+	// }
 
 });
