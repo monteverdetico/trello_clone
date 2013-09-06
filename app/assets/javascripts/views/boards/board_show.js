@@ -50,6 +50,7 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		that.triggerSortable();
 		
 		return that;
+		
 	},
 	
 	triggerSortable: function() {
