@@ -37,6 +37,8 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		});
 		
 		that.$el.html(renderedContent);
+
+		// TODO: Refactor into helper method.
 		
 		that.model.get('lists').each(function(list) {
 
@@ -59,6 +61,10 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		});
 			
 		$lists.on("sortchange", function(event, ui) {
+			// make ajax request to custom route that will handle
+			// hash of list id and position
+			// server should handle request and update positions
+			
 			console.log($lists);
 			$lists.sortable("toArray");
 			

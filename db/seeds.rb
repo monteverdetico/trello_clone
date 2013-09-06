@@ -6,5 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 ActiveRecord::Base.transaction do
-  
+  sugar = User.create!(username: "Sugar", password: "password")
+  board1 = sugar.boards.create!(title: "Chores")
 end

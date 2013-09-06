@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130904005228) do
+ActiveRecord::Schema.define(:version => 20130906002221) do
 
   create_table "board_members", :force => true do |t|
     t.integer  "user_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130904005228) do
     t.integer  "list_id",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "position",   :null => false
   end
 
   add_index "cards", ["list_id"], :name => "index_cards_on_list_id"
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130904005228) do
     t.integer  "board_id",   :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "position",   :null => false
   end
 
   add_index "lists", ["board_id"], :name => "index_lists_on_board_id"
