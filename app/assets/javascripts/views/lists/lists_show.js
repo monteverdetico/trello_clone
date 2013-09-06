@@ -17,7 +17,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 	className: "col-md-3",
 	
 	id: function() {
-		return "list" + this.model.get('id');
+		return this.model.get('id');
 	},
 	
 	newCard: function(event) {	

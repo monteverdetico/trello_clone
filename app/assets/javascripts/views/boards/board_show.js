@@ -53,22 +53,54 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		
 	},
 	
+	_generatePositions: function(listIds) {
+		var newPositions = {};
+		
+		_.each(listIds, function(listId, i) {
+			newPositions[listId] = i;
+		});
+		
+		return {positions: newPositions}
+	},
+	
 	triggerSortable: function() {
+		var that = this;
 		var hook = this.$el;
 		var $lists = hook.find('#lists');
+
+		var userId = this.model.get('user_id');
+		var boardId = this.model.get('id');
+		var url = "/users/" + userId + "/boards/" + boardId + "/positions";
 		
 		$lists.sortable({
-			tolerance: "pointer"
+			tolerance: "pointer",
+			update: function(event, ui) {
+				var listIds = $(this).sortable("toArray");
+				var newPositions = that._generatePositions(listIds);
+				
+				$.ajax({
+					url: url,
+					data: newPositions,
+					dataType: "json",
+					type: "put",
+					success: function(responseData) {
+						that.model.get("lists").set(responseData, 
+							{silent: true, parse: true});
+					}							
+				});
+			}
 		});
 			
-		$lists.on("sortchange", function(event, ui) {
-			// make ajax request to custom route that will handle
-			// hash of list id and position
-			// server should handle request and update positions
 			
-			console.log($lists);
-			$lists.sortable("toArray");
-		});
+		// $lists.on("sortchange", function(event, ui) {
+		// 	// make ajax request to custom route that will handle
+		// 	// hash of list id and position
+		// 	// server should handle request and update positions
+		// 	});
+		// 	
+		// 	console.log(that);
+		// 	$lists.sortable("toArray");
+		// });
 	}
 	// THIS IS FOR CARDS
 	// triggerSortable: function() {
