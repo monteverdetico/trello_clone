@@ -91,16 +91,4 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 			}
 		});
 	}
-	// THIS IS FOR CARDS
-	// triggerSortable: function() {
-	// 	var hook = this.$el;
-	// 	
-	// 	this.model.get('lists').each(function(list) {
-	// 		var sortableList = "#list" + list.get('id');
-	// 
-	// 		hook.find(sortableList).sortable({
-	// 			connectWith: ".col-md-3 .connectedSortable"
-	// 		}).disableSelection();
-	// 	});
-	// }
 });

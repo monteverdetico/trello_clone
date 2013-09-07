@@ -45,10 +45,11 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		
 		that.model.get('cards').each(function(card) {
 			var cardView = new TrelloClone.Views.CardsShow({model: card});
-			that.$('#cards').append(cardView.render().$el);
+			that.$('#list-' + that.model.get('id')).append(cardView.render().$el);
 		});
 		
 		that.triggerSortable();
+		that.triggerConnectedSortable();
 		
 		return that;
 	},
@@ -61,6 +62,15 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		});
 		
 		return {positions: newPositions}
+	},
+	
+	triggerConnectedSortable: function() {
+		var hook = this.$el;
+		var connectedCards = "#list-" + this.model.get('id');
+		
+		hook.find(connectedCards).sortable({
+			connectWith: hook.find(".connectedSortable")
+		}).disableSelection();
 	},
 	
 	triggerSortable: function() {

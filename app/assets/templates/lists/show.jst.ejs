@@ -1,4 +1,3 @@
-<!-- TODO: add sortable!! -->
 <ul class="list-group">
 	<div class="list-group-item active">						
 		<div class="editList" data-id="<%= list.get('id') %>">
@@ -6,10 +5,11 @@
 		</div>
 	</div>
 	<div class="list-group-item" id="cards">							
-		<!-- card view -->
+		<div class="connectedSortable" id="list-<%= list.get('id') %>">
+			<!-- card view -->
+		</div>
 	</div>
 
-<!-- TODO: STYLE ME!!! -->
 	<div class="list-group-item">
 		<div class="newCard" data-id="<%= list.get('id') %>">
 			<button type="button" class="btn btn-default btn-sm" id="createCard">

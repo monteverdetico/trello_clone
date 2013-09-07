@@ -1,6 +1,6 @@
 TrelloClone.Views.CardsShow = Backbone.View.extend({
 	
-	tagName: "li",
+	// tagName: "li",
 	
 	className: "list-group-item",
 	
