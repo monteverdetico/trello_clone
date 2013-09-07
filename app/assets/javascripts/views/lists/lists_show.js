@@ -69,7 +69,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		var connectedCards = "#list-" + this.model.get('id');
 		
 		hook.find(connectedCards).sortable({
-			connectWith: hook.find(".connectedSortable")
+			connectWith: ".connectedSortable"
 		}).disableSelection();
 	},
 	
