@@ -69,7 +69,14 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		var connectedCards = "#list-" + this.model.get('id');
 		
 		hook.find(connectedCards).sortable({
-			connectWith: ".connectedSortable"
+			connectWith: ".connectedSortable",
+			receive: function(event, ui) {
+				debugger
+				console.log(event)
+				// send data for two lists to update card positions
+				// update list_attribute for moved card
+				// use event and ui to generate data in helper
+			}
 		}).disableSelection();
 	},
 	
