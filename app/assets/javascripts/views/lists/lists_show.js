@@ -54,14 +54,14 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		return that;
 	},
 	
-	_generatePositions: function(listIds) {
+	_generatePositions: function(ids) {
 		var newPositions = {};
 		
-		_.each(listIds, function(listId, i) {
-			newPositions[listId] = i;
+		_.each(ids, function(id, i) {
+			newPositions[id] = i;
 		});
 		
-		return {positions: newPositions}
+		return newPositions
 	},
 	
 	triggerConnectedSortable: function() {
@@ -71,6 +71,8 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		hook.find(connectedCards).sortable({
 			connectWith: ".connectedSortable",
 			receive: function(event, ui) {
+				var receiverId = $(event.target).attr('id').match(/\d/);
+				var senderId = "";
 				debugger
 				console.log(event)
 				// send data for two lists to update card positions
@@ -83,7 +85,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 	triggerSortable: function() {
 		var that = this;
 		var hook = that.$el;
-		var $lists = hook.find('#cards');
+		var $lists = hook.find('.connectedSortable');
 
 		var listId = that.model.get('id');
 		var url = "/lists/" + listId + "/positions";
@@ -91,9 +93,9 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		$lists.sortable({
 			tolerance: "pointer",
 			update: function(event, ui) {
-				var listIds = $(this).sortable("toArray");
-				var newPositions = that._generatePositions(listIds);
-
+				var cardIds = $(this).sortable("toArray");
+				var newPositions = {positions: that._generatePositions(cardIds)};
+				
 				$.ajax({
 					url: url,
 					data: newPositions,
