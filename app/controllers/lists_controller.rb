@@ -25,12 +25,26 @@ class ListsController < ApplicationController
   
   def positions
     @list = List.find(params[:id])
-    @cards = @list.cards
-    new_positions = params[:positions]
-
-    @cards.each do |card|
+    old_cards = @list.cards
+    new_positions = params[:positions] || {}
+    @cards = []
+    
+    old_cards.each do |card|
       card.position = new_positions[card.id.to_s]
-      card.save!
+      
+      if card.position
+        @cards << card
+        card.save!
+      end
+    end
+    
+    if params[:card]
+      card_id = params[:card]["id"]
+      new_card = Card.update(card_id, :list_id => params[:id],
+        :body => params[:card]["body"],
+        :position => new_positions[card_id])
+        
+      @cards << new_card
     end
     
     render :positions    

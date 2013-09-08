@@ -48,7 +48,6 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 			that.$('#list-' + that.model.get('id')).append(cardView.render().$el);
 		});
 		
-		that.triggerSortable();
 		that.triggerConnectedSortable();
 		
 		return that;
@@ -65,36 +64,17 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 	},
 	
 	triggerConnectedSortable: function() {
-		var hook = this.$el;
-		var connectedCards = "#list-" + this.model.get('id');
+		var that = this;
+		var hook = that.$el;
+		var connectedCards = "#list-" + that.model.get('id');
 		
 		hook.find(connectedCards).sortable({
 			connectWith: ".connectedSortable",
-			receive: function(event, ui) {
-				var receiverId = $(event.target).attr('id').match(/\d/);
-				var senderId = "";
-				debugger
-				console.log(event)
-				// send data for two lists to update card positions
-				// update list_attribute for moved card
-				// use event and ui to generate data in helper
-			}
-		}).disableSelection();
-	},
-	
-	triggerSortable: function() {
-		var that = this;
-		var hook = that.$el;
-		var $lists = hook.find('.connectedSortable');
-
-		var listId = that.model.get('id');
-		var url = "/lists/" + listId + "/positions";
-		
-		$lists.sortable({
-			tolerance: "pointer",
-			update: function(event, ui) {
-				var cardIds = $(this).sortable("toArray");
-				var newPositions = {positions: that._generatePositions(cardIds)};
+			remove: function(event, ui) {
+				var listId = that.model.get('id');
+				var cards = $(event.target).sortable("toArray");
+				var newPositions = {positions: that._generatePositions(cards)}; 
+				var url = "/lists/" + listId + "/positions";
 				
 				$.ajax({
 					url: url,
@@ -106,8 +86,30 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 							{silent: true});
 					}							
 				});
-			}
-		});
-	}
-
+			},
+			
+			receive: function(event, ui) {
+				var listId = that.model.get('id');
+				var cards = $(event.target).sortable("toArray");
+				var url = "/lists/" + listId + "/positions";
+				
+				var movedCardId = $(ui.item).attr('id');
+				var movedCardBody = $(ui.item).html();
+				
+				var allData = {positions: that._generatePositions(cards), 
+										card: {body: movedCardBody, id: movedCardId}};
+		
+				$.ajax({
+					url: url,
+					data: allData,
+					dataType: "json",
+					type: "put",
+					success: function(responseData) {
+						that.model.get("cards").set(responseData, 
+							{silent: true});
+					}							
+				});
+			},
+		}).disableSelection();
+	},
 });
