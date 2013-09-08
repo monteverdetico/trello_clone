@@ -23,11 +23,12 @@ class ListsController < ApplicationController
     end  
   end
   
+  # route to update card positions in a list
   def positions
     @list = List.find(params[:id])
+    @cards = []
     old_cards = @list.cards
     new_positions = params[:positions] || {}
-    @cards = []
     
     old_cards.each do |card|
       card.position = new_positions[card.id.to_s]
