@@ -70,6 +70,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		
 		hook.find(connectedCards).sortable({
 			connectWith: ".connectedSortable",
+			
 			remove: function(event, ui) {
 				var listId = that.model.get('id');
 				var cards = $(event.target).sortable("toArray");
@@ -94,7 +95,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 				var url = "/lists/" + listId + "/positions";
 				
 				var movedCardId = $(ui.item).attr('id');
-				var movedCardBody = $(ui.item).html();
+				var movedCardBody = $(ui.item).html().trim();
 				
 				var allData = {positions: that._generatePositions(cards), 
 										card: {body: movedCardBody, id: movedCardId}};
@@ -107,9 +108,27 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 					success: function(responseData) {
 						that.model.get("cards").set(responseData, 
 							{silent: true});
-					}							
+					},						
 				});
 			},
+			// currently redundant; three ajax requests are sent when sorting across lists
+			update: function(event, ui) {
+				var listId = that.model.get('id');
+				var cards = $(event.target).sortable("toArray");
+				var newPositions = {positions: that._generatePositions(cards)}; 
+				var url = "/lists/" + listId + "/positions";
+				
+				$.ajax({
+					url: url,
+					data: newPositions,
+					dataType: "json",
+					type: "put",
+					success: function(responseData) {
+						that.model.get("cards").set(responseData, 
+							{silent: true});
+					}							
+				});				
+			}
 		}).disableSelection();
 	},
 });
