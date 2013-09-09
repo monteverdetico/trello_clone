@@ -1,5 +1,6 @@
 TrelloClone.Views.BoardShow = Backbone.View.extend({
 	initialize: function() {
+		this.childrenViews = [];
 		var model = this.model;
 		var lists = model.get('lists');
 		
@@ -43,14 +44,14 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		that.model.get('lists').each(function(list) {
 
 			var listView = new TrelloClone.Views.ListsShow({model: list});
+			that.childrenViews << listView;
 			
 			that.$('#lists').append(listView.render().$el);
 		});
 		
 		that.triggerSortable();
 		
-		return that;
-		
+		return that;		
 	},
 	
 	_generatePositions: function(listIds) {
@@ -90,5 +91,14 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 				});
 			}
 		});
+	},
+	
+	leave: function() {
+		_.each(this.childrenViews, function(childView) {
+			child.leave();
+		});
+		
+		this.off();
+		this.remove();
 	}
 });

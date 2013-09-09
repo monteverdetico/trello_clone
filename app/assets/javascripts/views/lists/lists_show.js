@@ -1,6 +1,7 @@
 TrelloClone.Views.ListsShow = Backbone.View.extend({
 
   initialize: function() {
+		this.childrenViews = [];
 		var cards = this.model.get('cards');
 		
   	this.listenTo(this.model, "change", this.render);
@@ -45,9 +46,10 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		
 		that.model.get('cards').each(function(card) {
 			var cardView = new TrelloClone.Views.CardsShow({model: card});
+			that.childrenViews << cardView;
 			that.$('#list-' + that.model.get('id')).append(cardView.render().$el);
 		});
-		
+
 		that.triggerConnectedSortable();
 		
 		return that;
@@ -111,7 +113,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 					},						
 				});
 			},
-			// currently redundant; three ajax requests are sent when sorting across lists
+			// currently redundant; three ajax requests are sent when sorting across lists; can sortable and connected sortable be separate??
 			update: function(event, ui) {
 				var listId = that.model.get('id');
 				var cards = $(event.target).sortable("toArray");
@@ -131,4 +133,13 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 			}
 		}).disableSelection();
 	},
+	
+	leave: function() {
+		_.each(this.childrenViews, function(childView) {
+			child.leave();
+		});
+		
+		this.off();
+		this.remove();
+	}
 });

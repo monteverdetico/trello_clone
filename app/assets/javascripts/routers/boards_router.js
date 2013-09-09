@@ -18,17 +18,32 @@ TrelloClone.Routers.Boards = Backbone.Router.extend({
 		var newBoardView = new TrelloClone.Views.BoardShow({
 			model: board
 		});
-		
-		that.$rootEl.html(newBoardView.render().$el);				
+
+
+		that.swap(newBoardView);
+		// that.$rootEl.html(newBoardView.render().$el);				
 	},
 	
 	index: function() {
 		var boards = this.boards;
+		
+		// TODO: swap view?!
 
 		var newBoardsView = new TrelloClone.Views.BoardsIndex({
 			collection: boards
 		});
-
-		this.$rootEl.html(newBoardsView.render().$el);
+		
+		this.swap(newBoardsView);
+		// this.$rootEl.html(newBoardsView.render().$el);
+	},
+	
+	swap: function(newView) {
+		
+		if (this.currentView) {
+			this.currentView.leave();
+		}
+		
+		this.currentView = newView;
+		this.$rootEl.empty().append(this.currentView.render().$el)
 	}
 });
