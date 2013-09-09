@@ -10,11 +10,15 @@
 		</div>
 	</div>
 
-	<div class="list-group-item">
+	<div class="list-group-item" id="createCardButton-<%= list.get('id') %>">
 		<div class="newCard" data-id="<%= list.get('id') %>">
 			<button type="button" class="btn btn-default btn-sm" id="createCard">
 				create card
 			</button>
 		</div>
-</div>
+	</div>
+	
+	<div class="list-group-item hidden" id="createCardForm-<%= list.get('id') %>">
+		<!-- card form view -->
+	</div>
 </ul>

@@ -4,6 +4,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		this.childrenViews = [];
 		var cards = this.model.get('cards');
 		
+		// THIS SHOULD NOT JUST RENDER; SHOULD SWAP VIEW
   	this.listenTo(this.model, "change", this.render);
 		this.listenTo(cards, "add", this.render);
   },
@@ -21,16 +22,32 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		return this.model.get('id');
 	},
 	
-	newCard: function(event) {	
-		var newCard = new TrelloClone.Views.CardForm({model: this.model});
+	newCard: function(event) {
+		// hide "create card" button
+		var id = this.model.get('id');
+		$('#createCardButton-' + id).toggleClass('hidden');
 		
-		$(event.currentTarget.parentElement).html(newCard.render().$el);
+		// render card form view
+		var newCard = new TrelloClone.Views.CardForm({model: this.model});
+		$('#createCardForm-' + id).empty();
+		$('#createCardForm-' + id).html(newCard.render().$el).toggleClass('hidden');
+	},
+	
+	create: function(event) {
+		event.preventDefault();
+
+		var listId = this.model.get('id');
+		var cardBody = $(event.currentTarget).serializeJSON().card.body;
+				
+		this.model.get('cards').create({list_id: listId, body: cardBody}, 
+			{wait: true});
 	},
 	
 	editTitle: function(event) {
 		var list = this.model
 		
 		var editForm = new TrelloClone.Views.ListForm({model: list});
+		this.childrenViews << editForm;
 
 		$(event.currentTarget.parentElement).html(editForm.render().$el);
 	},
@@ -47,6 +64,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		that.model.get('cards').each(function(card) {
 			var cardView = new TrelloClone.Views.CardsShow({model: card});
 			that.childrenViews << cardView;
+			
 			that.$('#list-' + that.model.get('id')).append(cardView.render().$el);
 		});
 
