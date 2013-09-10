@@ -6,6 +6,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		
   	this.listenTo(this.model, "change", this.swap);
 		this.listenTo(cards, "add", this.swap);
+		this.listenTo(cards, "destroy", this.swap);
   },
 	
 	events: {

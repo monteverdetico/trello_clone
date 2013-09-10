@@ -12,7 +12,8 @@ class CardsController < ApplicationController
   end
   
   def destroy
-    # TODO: write me!!
+    Card.destroy(params[:id])
+    head :ok
   end
   
   def update
