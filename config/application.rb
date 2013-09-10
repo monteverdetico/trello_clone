@@ -60,6 +60,6 @@ module TrelloClone
     config.assets.version = '1.0'
     
     # Don't initialize for Heroku
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = false    
   end
 end

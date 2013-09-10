@@ -11,6 +11,10 @@ class CardsController < ApplicationController
     end
   end
   
+  def destroy
+    # TODO: write me!!
+  end
+  
   def update
     # TODO: write me!!
   end

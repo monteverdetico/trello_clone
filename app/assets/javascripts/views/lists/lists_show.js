@@ -10,7 +10,8 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 	
 	events: {
   	"click .editList": "editTitle",
-		"click .newCard": "newCard"	
+		"click .newCard": "newCard",
+		"click .delete": "deleteList"	
   },
 	
 	template: JST['lists/show'],
@@ -19,6 +20,11 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 	
 	id: function() {
 		return this.model.get('id');
+	},
+	
+	deleteList: function(event) {
+		event.preventDefault();
+		this.model.destroy();
 	},
 	
 	newCard: function(event) {
@@ -125,7 +131,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 				var movedCardBody = $(ui.item).html().trim();
 				
 				var allData = {positions: that._generatePositions(cards), 
-										card: {body: movedCardBody, id: movedCardId}};
+										card: {id: movedCardId}};
 		
 				$.ajax({
 					url: url,

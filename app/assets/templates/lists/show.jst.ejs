@@ -1,8 +1,23 @@
 <ul class="list-group">
 	<div class="list-group-item active">						
-		<div class="editList" data-id="<%= list.get('id') %>">
+		<span class="editList" data-id="<%= list.get('id') %>">
 			<%= list.escape('title') %>
-		</div>
+		</span>
+			<a href="#" id="drop<%= list.get('id') %>" role="button" 
+				 class="dropdown-toggle btn btn-info btn-xs" data-toggle="dropdown" 
+				 style="float:right">
+				<b class="caret"></b>
+			</a>
+
+			<ul class="dropdown-menu" role="menu" 
+					aria-labelledby="drop<%= list.get('id') %>">
+					<li role="presentation">
+						<p class="delete btn btn-danger btn-sm" 
+							data-id="delete-list-<%= list.get('id') %>">
+							DELETE LIST
+						</p>
+					</li>
+			</ul>
 	</div>
 	<div class="list-group-item" id="cards-<%= list.get('id') %>">							
 		<div class="connectedSortable" id="list-<%= list.get('id') %>">
@@ -12,7 +27,7 @@
 
 	<div class="list-group-item" id="createCardButton-<%= list.get('id') %>">
 		<div class="newCard" data-id="<%= list.get('id') %>">
-			<button type="button" class="btn btn-default btn-sm" id="createCard">
+			<button type="button" class="btn btn-success btn-sm" id="createCard">
 				create card
 			</button>
 		</div>

@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
   
-  has_many :boards
+  has_many :boards,
+           :dependent => :destroy
   
   has_many :board_memberships,
            :class_name => "BoardMember",

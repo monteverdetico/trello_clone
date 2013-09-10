@@ -13,6 +13,11 @@ class ListsController < ApplicationController
     end 
   end
   
+  def destroy
+    List.destroy(params[:id])
+    head :ok
+  end
+  
   def update
     @list = List.find(params[:id])
 
@@ -42,7 +47,6 @@ class ListsController < ApplicationController
     if params[:card]
       card_id = params[:card]["id"]
       new_card = Card.update(card_id, :list_id => params[:id],
-        :body => params[:card]["body"],
         :position => new_positions[card_id])
         
       @cards << new_card
