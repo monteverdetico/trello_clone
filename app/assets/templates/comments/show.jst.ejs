@@ -1,0 +1,20 @@
+<form class="form-horizontal" id="addComment">
+	<div class="form-group">
+		<textarea rows="1" class="form-control" 
+					 placeholder="add a comment..." name="comment[body]" 
+					 style="resize: vertical" autofocus></textarea>
+	</div>
+	<div class="form-group">
+    <button type="submit" class="btn btn-primary">
+			Add Comment
+		</button>
+	</div>				 
+</form>
+
+<ul class="list-group" id="cardComments<%=card.get('id')%>">
+ <% card.get('comments').each(function(comment) { %>
+	 <li class="list-group-item">
+		 <%= comment.escape('user_id')%>: <%= comment.escape('body') %>
+	 </li>
+ <% }); %>
+</ul>

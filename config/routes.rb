@@ -1,5 +1,6 @@
 TrelloClone::Application.routes.draw do
   resources :cards, :only => [:create, :update, :destroy]
+  resources :comments, :only => [:create]
   resources :lists, :only => [:create, :update, :destroy] do
     put "positions", :on => :member
   end

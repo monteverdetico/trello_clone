@@ -10,6 +10,21 @@ TrelloClone.Views.CardsShow = Backbone.View.extend({
 		return this.model.get('id');
 	},
 	
+	createComment: function(event) {
+		event.preventDefault();
+		
+		var formData = $(event.currentTarget).serializeJSON();
+		var commentBody = formData.comment.body
+		var cardId = this.model.get('id');
+		
+		this.model.get('comments').create({card_id: cardId, body: commentBody}, 
+			{ wait: true,
+				success: function(model) {
+					debugger
+				}
+			});
+	},
+	
 	deleteCard: function(event) {
 		event.preventDefault();
 		this.model.destroy();
@@ -23,7 +38,7 @@ TrelloClone.Views.CardsShow = Backbone.View.extend({
 	
 	render: function() {
 		var that = this;
-
+		
 		var renderedContent = that.template({
 			card: that.model
 		});

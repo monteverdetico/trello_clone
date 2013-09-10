@@ -6,5 +6,9 @@ child :lists do
 	
 	child :cards do
 		attributes :body, :list_id, :id, :position
+		
+		child :comments do
+			attributes :user_id, :card_id, :body
+		end
 	end
 end

@@ -3,4 +3,6 @@ class Card < ActiveRecord::Base
   validates :body, :list_id, :presence => true
   
   belongs_to :list
+  has_many :comments,
+           :dependent => :destroy
 end
