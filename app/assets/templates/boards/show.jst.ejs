@@ -2,21 +2,22 @@
 <div class="container">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-		    <h3 class="panel-title">
+		    <h3 class="panel-title" id="editBoard">
 					<%= board.escape('title') %>
-					<span>
-					  <% if (board.get('lists').length <= 3) { %>
-							<a data-toggle="modal" href="#newList" 
-								 class="btn btn-default btn-sm">
-								 Add List
-							</a>
-						<% } %>							
-					</span>	
+					<span class="glyphicon glyphicon-pencil"></span>
 				</h3>
 		</div>
 		
 		<!-- list views -->
 	  <div class="panel-body">
+		  <% if (board.get('lists').length <= 3) { %>
+				<p>
+				<a data-toggle="modal" href="#newList" 
+					 class="btn btn-default btn-sm">
+					 Add List
+				</a>
+			</p>
+			<% } %>							
 			<div class="row" id="lists">
 			</div>
 		</div>

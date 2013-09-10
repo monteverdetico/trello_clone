@@ -3,12 +3,14 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		this.childrenViews = [];
 		var model = this.model;
 		var lists = model.get('lists');
-		
-		this.listenTo(lists, "add", this.render);		
+
+		this.listenTo(lists, "add", this.swap);
+		this.listenTo(this.model, "change", this.swap);		
 	},
 	
 	events: {
-		"submit #createList": "createList"
+		"submit #createList": "createList",
+		"click #editBoard": "editBoard"
 	},
 	
   template: JST['boards/show'],
@@ -28,6 +30,16 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		$('.modal-backdrop').remove();
 		$('body').removeClass('modal-open');									
 	},
+	
+	editBoard: function(event) {
+		var board = this.model
+		
+		var editForm = new TrelloClone.Views.BoardForm({model: board});
+		this.childrenViews.push(editForm);
+
+		$(event.currentTarget.parentElement).html(editForm.render().$el);
+	},
+	
 		
 	render: function() {
 		var that = this;
@@ -37,12 +49,10 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		});
 		
 		that.$el.html(renderedContent);
-
-		// TODO: Refactor into helper method.
 		
 		that.model.get('lists').each(function(list) {
 			var listView = new TrelloClone.Views.ListsShow({model: list});
-			that.childrenViews << listView;
+			that.childrenViews.push(listView);
 			
 			that.$('#lists').append(listView.render().$el);
 		});
@@ -50,6 +60,14 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		that.triggerSortable();
 		
 		return that;		
+	},
+	
+	swap: function() {
+		_.each(this.childrenViews, function(listView) {
+			listView.leave();
+		});
+		
+		this.render();
 	},
 	
 	_generatePositions: function(listIds) {
@@ -93,7 +111,7 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 	
 	leave: function() {
 		_.each(this.childrenViews, function(childView) {
-			child.leave();
+			childView.leave();
 		});
 		
 		this.off();

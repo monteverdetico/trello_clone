@@ -12,10 +12,6 @@ class BoardsController < ApplicationController
     end
   end
   
-  def destroy
-    # TODO: the user that destroys must be the board creator
-  end
-  
   def index
     @boards = current_user.boards
     render :index
@@ -32,5 +28,16 @@ class BoardsController < ApplicationController
     end
     
     render :positions           
+  end
+  
+  def update
+    @board = Board.find(params[:id])
+    
+    if @board.update_attributes({:title => params[:title]})
+      render :updated_board
+    else
+      render :json => @board.errors.full_messages, :status => 422
+    end  
+    
   end
 end

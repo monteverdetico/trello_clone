@@ -4,9 +4,8 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		this.childrenViews = [];
 		var cards = this.model.get('cards');
 		
-		// THIS SHOULD NOT JUST RENDER; SHOULD SWAP VIEW
-  	this.listenTo(this.model, "change", this.render);
-		this.listenTo(cards, "add", this.render);
+  	this.listenTo(this.model, "change", this.swap);
+		this.listenTo(cards, "add", this.swap);
   },
 	
 	events: {
@@ -47,7 +46,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		var list = this.model
 		
 		var editForm = new TrelloClone.Views.ListForm({model: list});
-		this.childrenViews << editForm;
+		this.childrenViews.push(editForm);
 
 		$(event.currentTarget.parentElement).html(editForm.render().$el);
 	},
@@ -63,7 +62,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		
 		that.model.get('cards').each(function(card) {
 			var cardView = new TrelloClone.Views.CardsShow({model: card});
-			that.childrenViews << cardView;
+			that.childrenViews.push(cardView);
 			
 			that.$('#list-' + that.model.get('id')).append(cardView.render().$el);
 		});
@@ -71,6 +70,14 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		that.triggerConnectedSortable();
 		
 		return that;
+	},
+	
+	swap: function() {
+		_.each(this.childrenViews, function(cardView) {
+			cardView.leave();
+		}, this);
+
+		this.render();
 	},
 	
 	_generatePositions: function(ids) {
@@ -154,9 +161,9 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 	
 	leave: function() {
 		_.each(this.childrenViews, function(childView) {
-			child.leave();
+			childView.leave();
 		});
-		
+
 		this.off();
 		this.remove();
 	}

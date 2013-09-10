@@ -19,8 +19,8 @@ TrelloClone.Views.CardForm = Backbone.View.extend({
 	close: function(event) {
 		event.preventDefault();
 		this.leave();
-		var id = this.model.id;
 		
+		var id = this.model.id;
 		$('#createCardForm-' + id).toggleClass('hidden');
 		$('#createCardButton-' + id).toggleClass('hidden');
 	},

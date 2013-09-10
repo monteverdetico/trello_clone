@@ -1,16 +1,16 @@
-TrelloClone.Views.ListForm = Backbone.View.extend({
+TrelloClone.Views.BoardForm = Backbone.View.extend({
 
-	template: JST['forms/editList'],
+	template: JST['forms/editBoard'],
 	
 	events: {
-		"submit #editList": "update"
+		"submit #editBoard-form": "update"
 	},
 	
 	render: function() {
 		var that = this;
 		
 		var renderedContent = that.template({
-			list: that.model
+			board: that.model
 		});
 		
 		that.$el.html(renderedContent);
@@ -20,8 +20,7 @@ TrelloClone.Views.ListForm = Backbone.View.extend({
 	update: function(event) {
 		event.preventDefault();
 		
-		var newTitle = $(event.currentTarget).serializeJSON().list.title;
-				
+		var newTitle = $(event.currentTarget).serializeJSON().board.title;
 		this.model.save({title: newTitle}, {wait: true});
 	},
 	

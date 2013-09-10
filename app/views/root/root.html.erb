@@ -8,7 +8,7 @@
 				<li><a href="#">Home</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<p class="navbar-text"data-id="<%= current_user.id %>">
+				<p class="navbar-text" data-id="<%= current_user.id %>">
 					Logged in as: <%= current_user.username %>
 				</p>
 				<li>
@@ -23,13 +23,24 @@
 		</div>
 	</div>
 </div>
+
 <div class="container" id="content">
 </div>
 
+<script type="application/json" id="bootstrapped-data">
+	<%= render "data.json", :boards => @boards %>
+</script>
+
 <script type="application/javascript">
 	$(function(){
-		var user_id = $('p').attr('data-id');
+		var user_id, div, data;
 		
-		window.TrelloClone.initialize($("#content"), user_id);
+		user_id = $('p').attr('data-id');
+		
+		div = $('<div></div>');
+		div.html($('#bootstrapped-data').text());
+		data = JSON.parse(div.text());
+		
+		window.TrelloClone.initialize($("#content"), user_id, data);
 	});
 </script>
