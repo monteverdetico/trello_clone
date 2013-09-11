@@ -35,8 +35,9 @@ TrelloClone.Views.CardsShow = Backbone.View.extend({
 		that.$el.html(renderedContent);
 		
 		var commentsView = new TrelloClone.Views.CommentsShow({
-			collection: that.model.get('comments')
-		}, {id: that.model.id});
+			collection: that.model.get('comments'),
+			id: that.model.id
+		});
 		
 		that.childrenViews.push(commentsView);
 		

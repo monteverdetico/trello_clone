@@ -1,7 +1,7 @@
 TrelloClone.Views.CommentsShow = Backbone.View.extend({
 
 	initialize: function() {
-		this.listenTo(this.collection, "add", this.render);
+		this.listenTo(this.collection, "add", this.swap);
 	},
 	
 	events: {
@@ -13,7 +13,7 @@ TrelloClone.Views.CommentsShow = Backbone.View.extend({
 		
 		var formData = $(event.currentTarget).serializeJSON();
 		var commentBody = formData.comment.body
-		var cardId = this.collection.models[0].get('card_id');
+		var cardId = this.id;
 		
 		this.collection.create({body: commentBody, card_id: cardId}, {wait: true});
 	},
@@ -30,6 +30,11 @@ TrelloClone.Views.CommentsShow = Backbone.View.extend({
 		that.$el.html(renderedContent);
 
 		return that;
+	},
+	
+	swap: function() {
+		this.off();
+		this.render();
 	},
 		
 	leave: function() {
