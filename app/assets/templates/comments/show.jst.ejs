@@ -11,8 +11,8 @@
 	</div>				 
 </form>
 
-<ul class="list-group" id="cardComments<%=card.get('id')%>">
- <% card.get('comments').each(function(comment) { %>
+<ul class="list-group">
+ <% comments.each(function(comment) { %>
 	 <li class="list-group-item">
 		 <%= comment.escape('user_id')%>: <%= comment.escape('body') %>
 	 </li>

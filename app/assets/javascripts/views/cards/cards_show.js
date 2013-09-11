@@ -1,5 +1,9 @@
 TrelloClone.Views.CardsShow = Backbone.View.extend({
 
+  initialize: function() {
+		this.childrenViews = [];
+  },
+	
 	className: "list-group-item",
 	
 	events: {
@@ -8,21 +12,6 @@ TrelloClone.Views.CardsShow = Backbone.View.extend({
 	
 	id: function() {
 		return this.model.get('id');
-	},
-	
-	createComment: function(event) {
-		event.preventDefault();
-		
-		var formData = $(event.currentTarget).serializeJSON();
-		var commentBody = formData.comment.body
-		var cardId = this.model.get('id');
-		
-		this.model.get('comments').create({card_id: cardId, body: commentBody}, 
-			{ wait: true,
-				success: function(model) {
-					debugger
-				}
-			});
 	},
 	
 	deleteCard: function(event) {
@@ -44,10 +33,23 @@ TrelloClone.Views.CardsShow = Backbone.View.extend({
 		});
 		
 		that.$el.html(renderedContent);
+		
+		var commentsView = new TrelloClone.Views.CommentsShow({
+			collection: that.model.get('comments')
+		}, {id: that.model.id});
+		
+		that.childrenViews.push(commentsView);
+		
+		that.$('#comments').html(commentsView.render().$el);
+		
 		return that;
 	},
 	
 	leave: function() {
+		_.each(this.childrenViews, function(childView) {
+			childView.leave();
+		});
+		
 		this.off();
 		this.remove();
 	}
