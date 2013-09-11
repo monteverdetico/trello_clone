@@ -14,7 +14,7 @@
 <ul class="list-group">
  <% comments.each(function(comment) { %>
 	 <li class="list-group-item">
-		 <%= comment.escape('user_id')%>: <%= comment.escape('body') %>
+		<span class="btn btn-xs" disabled="disabled"><%= comment.escape('user_id')%> <span class="glyphicon glyphicon-user"></span></span> <%= comment.escape('body') %>
 	 </li>
  <% }); %>
 </ul>
