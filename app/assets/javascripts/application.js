@@ -15,6 +15,7 @@
 //= require jquery-ui
 //= require jquery.serializeJSON.min
 //= require bootstrap
+//= require typeahead
 //= require underscore
 //= require backbone
 //= require trello_clone

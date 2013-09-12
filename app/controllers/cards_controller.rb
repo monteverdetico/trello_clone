@@ -5,7 +5,7 @@ class CardsController < ApplicationController
     @card.position = set_starting_position(params[:list_id])
     
     if @card.save
-      render :json => @card
+      render :create
     else
       render :json => @card.errors.full_messages
     end

@@ -75,7 +75,8 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		var that = this;
 		
 		var membersView = new TrelloClone.Views.MembersIndex({
-			collection: that.model.get('members')
+			collection: that.model.get('members'),
+			id: "board-" + that.model.get('id')
 		});
 		
 		that.$('#sidebar').html(membersView.render().$el);	

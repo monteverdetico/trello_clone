@@ -1,4 +1,5 @@
 TrelloClone::Application.routes.draw do
+  resources :boardmembers, :only => [:create]
   resources :cards, :only => [:create, :destroy]
   resources :cardassignments, :only => [:create, :update, :destroy]
   resources :comments, :only => [:create]
@@ -9,7 +10,7 @@ TrelloClone::Application.routes.draw do
   
   resource :session, :only => [:create, :new, :destroy]
   
-  resources :users, :only => [:create, :destroy, :new, :update] do
+  resources :users, :only => [:create, :destroy, :index, :new, :update] do
     resources :boards, :only => [:index, :create]
     resources :boards, :only => [:update] do
       put "positions", :on => :member
