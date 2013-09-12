@@ -16,6 +16,8 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 	
   template: JST['boards/show'],
 	
+	className: "container",
+	
 	createList: function(event) {
 		event.preventDefault();
 		
@@ -51,16 +53,32 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		
 		that.$el.html(renderedContent);
 		
+		that._renderLists();
+		that._renderSidebar();		
+		that._triggerSortable();
+		
+		return that;		
+	},
+	
+	_renderLists: function() {
+		var that = this;
+		
 		that.model.get('lists').each(function(list) {
 			var listView = new TrelloClone.Views.ListsShow({model: list});
 			that.childrenViews.push(listView);
 			
 			that.$('#lists').append(listView.render().$el);
 		});
+	},
+	
+	_renderSidebar: function() {
+		var that = this;
 		
-		that.triggerSortable();
+		var membersView = new TrelloClone.Views.MembersIndex({
+			collection: that.model.get('members')
+		});
 		
-		return that;		
+		that.$('#sidebar').html(membersView.render().$el);	
 	},
 	
 	swap: function() {
@@ -81,7 +99,7 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		return {positions: newPositions}
 	},
 	
-	triggerSortable: function() {
+	_triggerSortable: function() {
 		var that = this;
 		var hook = that.$el;
 		var $lists = hook.find('#lists');

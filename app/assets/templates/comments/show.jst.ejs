@@ -14,7 +14,16 @@
 <ul class="list-group">
  <% comments.each(function(comment) { %>
 	 <li class="list-group-item">
-		<span class="btn btn-xs" disabled="disabled"><%= comment.escape('user_id')%> <span class="glyphicon glyphicon-user"></span></span> <%= comment.escape('body') %>
+		<div class="btn btn-xs" disabled="disabled">
+			<%= comment.escape('user_id')%>
+			<span class="glyphicon glyphicon-user"></span>
+		</div>
+
+<!-- THIS NEEDS TO BE FIXED TO DISPLAY PROPERLY -->
+		<%= comment.escape('body') %>
+		<% var date = new Date(comment.escape('created_at')) %>
+		<% var options = {month: "short", day: "numeric", hour: "numeric", minute: "numeric" }%>
+		<small class="clearfix" style="float: right"><%= date.toLocaleString("en-US", options) %></small>
 	 </li>
  <% }); %>
 </ul>

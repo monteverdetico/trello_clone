@@ -12,7 +12,7 @@ TrelloClone.Views.CommentsShow = Backbone.View.extend({
 		event.preventDefault();
 		
 		var formData = $(event.currentTarget).serializeJSON();
-		var commentBody = formData.comment.body
+		var commentBody = formData.comment.body.trim();
 		var cardId = this.id;
 		
 		this.collection.create({body: commentBody, card_id: cardId}, {wait: true});

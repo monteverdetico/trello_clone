@@ -74,7 +74,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 			that.$('#list-' + that.model.get('id')).append(cardView.render().$el);
 		});
 
-		that.triggerConnectedSortable();
+		that._triggerConnectedSortable();
 		
 		return that;
 	},
@@ -97,7 +97,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		return newPositions
 	},
 	
-	triggerConnectedSortable: function() {
+	_triggerConnectedSortable: function() {
 		var that = this;
 		var hook = that.$el;
 		var connectedCards = "#list-" + that.model.get('id');

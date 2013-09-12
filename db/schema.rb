@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130910210807) do
+ActiveRecord::Schema.define(:version => 20130911204757) do
 
   create_table "board_members", :force => true do |t|
     t.integer  "user_id"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(:version => 20130910210807) do
   end
 
   add_index "boards", ["user_id"], :name => "index_boards_on_user_id"
+
+  create_table "card_assignments", :force => true do |t|
+    t.integer  "card_id",    :null => false
+    t.integer  "user_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "card_assignments", ["card_id"], :name => "index_card_assignments_on_card_id"
+  add_index "card_assignments", ["user_id"], :name => "index_card_assignments_on_user_id"
 
   create_table "cards", :force => true do |t|
     t.text     "body",       :null => false

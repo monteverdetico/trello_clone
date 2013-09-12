@@ -1,0 +1,7 @@
+<ul class="list-group">
+<% members.each(function(member) { %>
+	<li class="member list-group-item" id="member-<%= member.get('id') %>">
+		<%= member.escape('username') %>
+	</li>
+<% }); %>
+</ul>

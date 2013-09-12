@@ -15,11 +15,7 @@ class CardsController < ApplicationController
     Card.destroy(params[:id])
     head :ok
   end
-  
-  def update
-    # TODO: write me!!
-  end
-  
+    
   private
   def set_starting_position(list_id)
     List.find(list_id).cards.count

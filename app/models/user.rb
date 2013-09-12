@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
            :source => :board
   
   has_many :comments
+  has_many :card_assignments
+  has_many :assigned_cards,
+           :through => :card_assignments,
+           :source => :card
   
   def self.find_by_credentials(username, password)
     user = User.find_by_username(username)

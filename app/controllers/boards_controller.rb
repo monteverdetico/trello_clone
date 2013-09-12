@@ -16,7 +16,7 @@ class BoardsController < ApplicationController
     @boards = current_user.boards
     render :index
   end
-  
+
   def positions
     @board = Board.find(params[:id])
     @lists = @board.lists
@@ -37,7 +37,6 @@ class BoardsController < ApplicationController
       render :updated_board
     else
       render :json => @board.errors.full_messages, :status => 422
-    end  
-    
+    end      
   end
 end

@@ -1,6 +1,9 @@
-<a href="#editCard<%= card.get('id') %>" data-toggle="modal">
+<a href="#editCard<%= card.get('id') %>" data-toggle="modal" id="card<%= card.get('id')%>">
 	<%= card.escape('body') %>
 </a>
+<div>
+	<%= card.escape('assigned_to') %>
+</div>
 
 <!-- cardDetail Modal -->
 <div class="modal fade" id="editCard<%= card.get('id') %>" tabindex="-1"
