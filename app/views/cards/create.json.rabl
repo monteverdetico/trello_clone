@@ -1,4 +1,5 @@
 object @card
+attributes :body, :list_id, :id, :position
 
 child :card_assignments do
 	attributes :id, :user_id, :card_id

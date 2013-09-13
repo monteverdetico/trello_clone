@@ -1,9 +1,10 @@
 <!-- board view -->
+<div class="col-md-12">
 <div class="panel panel-default">
 	<div class="panel-heading clearfix">
 	    <h3 class="panel-title">
-				<span id="editBoard"><%= board.escape('title') %>
-					<span class="glyphicon glyphicon-pencil"></span>
+				<span id="editBoard">
+					<%= board.escape('title') %>
 				</span>
 			  <% if (board.get('lists').length <= 3) { %>
 					<span style="float: right">
@@ -18,18 +19,24 @@
 	
 	<!-- list views -->
   <div class="panel-body">
-		<div class="row" id="lists">
+		<div class="row">
+			<div class="col-md-10" id="lists">
+			</div>
+			<div class="col-md-2">
+				<ul class="list-group">
+					<li class="list-group-item active">
+						Board Members
+					</li>
+					<li class="list-group-item" id="sidebar">
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
-<!-- TODO: should be sidebar or member view -->
-<div class="col-md-1" id="sidebar">
-	<div class="well sidebar-nav">
-	</div>
-</div>
-
-
+<!-- members view -->
+	
 <!-- newList Modal -->
 <div class="modal fade" id="newList" tabindex="-1" role="dialog" 
 		 aria-labelledby="myModalLabel" aria-hidden="true">

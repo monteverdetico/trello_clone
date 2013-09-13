@@ -104,7 +104,7 @@ TrelloClone.Views.ListsShow = Backbone.View.extend({
 		
 		hook.find(connectedCards).sortable({
 			connectWith: ".connectedSortable",
-			
+
 			remove: function(event, ui) {
 				var listId = that.model.get('id');
 				var cards = $(event.target).sortable("toArray");

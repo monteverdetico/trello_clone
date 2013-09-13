@@ -71,11 +71,6 @@ TrelloClone.Views.CardsShow = Backbone.View.extend({
 		});
 	},
 	
-	// swap: function() {
-	// 	this.leave();
-	// 	this.render();
-	// },
-	
 	leave: function() {
 		_.each(this.childrenViews, function(childView) {
 			childView.leave();

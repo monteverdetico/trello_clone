@@ -21,3 +21,7 @@ child :lists do
 		end
 	end
 end
+
+child :members => :members do
+	attributes :id, :username
+end

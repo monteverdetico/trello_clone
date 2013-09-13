@@ -15,9 +15,7 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 	},
 	
   template: JST['boards/show'],
-	
-	className: "container",
-	
+			
 	createList: function(event) {
 		event.preventDefault();
 		

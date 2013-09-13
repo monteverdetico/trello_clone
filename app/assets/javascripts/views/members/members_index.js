@@ -5,7 +5,7 @@ TrelloClone.Views.MembersIndex = Backbone.View.extend({
   },
 	
 	template: JST['members/index'],
-	
+			
 	render: function() {
 		var that = this;
 

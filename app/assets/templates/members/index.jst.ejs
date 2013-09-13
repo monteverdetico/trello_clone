@@ -1,10 +1,11 @@
-<ul class="list-group">
-<% members.each(function(member) { %>
-	<li class="member list-group-item" id="member-<%= member.get('id') %>">
-		<%= member.escape('username') %>
-	</li>
-<% }); %>
-</ul>
 <div>
 	<input class="typeahead" type="text" placeholder="add member">
 </div>
+
+<ul class="list-group">
+	<% members.each(function(member) { %>
+		<li class="member list-group-item" id="member-<%= member.get('id') %>">
+			<%= member.escape('username') %>
+		</li>
+	<% }); %>
+</ul>

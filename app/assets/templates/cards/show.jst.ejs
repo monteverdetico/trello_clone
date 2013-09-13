@@ -1,9 +1,13 @@
 <a href="#editCard<%= card.get('id') %>" data-toggle="modal" id="card<%= card.get('id')%>">
 	<%= card.escape('body') %>
-</a>
-<div>
-	<%= card.escape('assigned_to') %>
-</div>
+</a><span style="float: right">
+	<% var user = card.escape('assigned_to')[0] %>
+	<% if (user) { %>
+		<p class="btn btn-default btn-xs disabled">
+			<%= user.toUpperCase() %>
+		</p>	
+	<% } %>
+</span>
 
 <!-- cardDetail Modal -->
 <div class="modal fade" id="editCard<%= card.get('id') %>" tabindex="-1"
@@ -16,6 +20,7 @@
         <h4 class="modal-title">
 					<%= card.escape('body') %>
 				</h4>
+				<small>Assigned to: <%= card.escape('assigned_to') %></small>
       </div>
 			
 			<div class="modal-body" id="comments">
