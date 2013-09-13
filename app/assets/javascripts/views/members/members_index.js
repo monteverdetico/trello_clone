@@ -39,7 +39,7 @@ TrelloClone.Views.MembersIndex = Backbone.View.extend({
 		var boardId = that.id.match(/\d/g).join("");
 		
 		that.$('.typeahead').typeahead({
-			name: 'members',
+			name: 'members' + (Math.random() * 30),
 			prefetch: '/users.json',
 			ttl: 0
 		});

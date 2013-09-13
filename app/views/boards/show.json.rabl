@@ -16,3 +16,4 @@ end
 child :members => :members do
 	attributes :id, :username
 end
+

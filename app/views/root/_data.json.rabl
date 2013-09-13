@@ -23,6 +23,7 @@ child :lists do
 		
 		child :comments do
 			attributes :user_id, :card_id, :body, :created_at
+			:avatar_url
 		end
 	end
 end
