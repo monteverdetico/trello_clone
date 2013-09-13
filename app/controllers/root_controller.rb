@@ -3,6 +3,9 @@ class RootController < ApplicationController
   
   def root
     @boards = current_user.boards
+    membership_boards = current_user.memberships
+    @boards += membership_boards
+    
     render :root
   end
 end

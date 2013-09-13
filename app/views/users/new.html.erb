@@ -5,7 +5,7 @@
 	     type="hidden"
 	     value="<%= form_authenticity_token %>">
 			 
-		<h2 class="form-signin-heading">Create Account</h2>
+		<h2 class="form-signin-heading login-text">Create Account</h2>
 		
 		<% if !@user.errors.empty? %>
 			<% @user.errors.full_messages.each do |message|%>
@@ -14,20 +14,20 @@
 		<% end %>
 		
 		<div class="form-group">
-			<label for="user_username"><small>Username</small>	 
+			<label for="user_username"><small class="login-text">Username</small>	 
 			<input type="text" class="form-control" 
 					   name="user[username]" placeholder="Username" 
 						 value="<%= @user.username %>" id="user_username" autofocus>			 
 		</div>	
 		<div class="form-group">
-			<label for="user_email"><small>Email</small>			 					 
+			<label for="user_email"><small class="login-text">Email</small>			 					 
 			<input type="text" class="form-control" 
 						 name="user[email]" placeholder="Email address"
 						 value="<%= @user.email %>"
 						 id="user_email">
 		</div>		
 		<div class="form-group">			 					 
-			<label for="user_password"><small>Password</small> 
+			<label for="user_password"><small class="login-text">Password</small> 
 			<input type="password" class="form-control" 
 				   	 name="user[password]" placeholder="Password"
 						 id="user_password">
@@ -35,6 +35,8 @@
 		<button class="btn btn-large btn-primary" type="submit">Create</button>
 	</form>
 	<br>
-	<p> Already have an account? <a href="<%= new_session_url %>">Sign In</a>	
+	<p class="login-text"> 
+		Already have an account? <a href="<%= new_session_url %>">Sign In</a>
+	</p>
 </div>
 

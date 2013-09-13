@@ -1,11 +1,12 @@
-<div>
-	<input class="typeahead" type="text" placeholder="add member">
+<div class="list-group">
+	<input class="typeahead" type="text" placeholder="add member...">
 </div>
 
-<ul class="list-group">
+<ul class="list-group member-scroll">
 	<% members.each(function(member) { %>
 		<li class="member list-group-item" id="member-<%= member.get('id') %>">
-			<%= member.escape('username') %>
+			<img class="img-thumbnail" src="<%= member.escape('avatar_url')%>">
+			<%= member.escape('username') %> 
 		</li>
 	<% }); %>
 </ul>

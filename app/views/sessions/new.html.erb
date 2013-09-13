@@ -1,11 +1,11 @@
 <div class="container">
-	<form method="post" action="<%= session_url %>"class="form-signin">
+	<form method="post" action="<%= session_url %>" class="form-signin">
 	  <input
 	     name="authenticity_token"
 	     type="hidden"
 	     value="<%= form_authenticity_token %>">
 			 
-		<h2 class="form-signin-heading">Please Sign In</h2>
+		<h2 class="form-signin-heading login-text">Please Sign In</h2>
 		
 		<% if @errors %>
 			<p class="text-danger"><%= @errors %></p>
@@ -24,5 +24,7 @@
 		<button class="btn btn-large btn-primary" type="submit">Sign In</button>
 	</form>
 	<br>	
-	<p> Don't have an account? <a href="<%= new_user_url %>">Create Account</a>
+	<p class="login-text">
+		 Don't have an account? <a href="<%= new_user_url %>">Create Account</a>
+	</p>
 </div>

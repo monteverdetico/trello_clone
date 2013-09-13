@@ -12,18 +12,26 @@
 </form>
 
 <ul class="list-group">
- <% comments.each(function(comment) { %>
-	 <li class="list-group-item">
-		<div class="btn btn-xs" disabled="disabled">
-			<%= comment.escape('user_id')%>
-			<span class="glyphicon glyphicon-user"></span>
-		</div>
-
-<!-- THIS NEEDS TO BE FIXED TO DISPLAY PROPERLY -->
-		<%= comment.escape('body') %>
-		<% var date = new Date(comment.escape('created_at')) %>
-		<% var options = {month: "short", day: "numeric", hour: "numeric", minute: "numeric" }%>
-		<small class="clearfix" style="float: right"><%= date.toLocaleString("en-US", options) %></small>
-	 </li>
- <% }); %>
+	<% comments.each(function(comment) { %>
+		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left">
+					<div class="btn btn-xs" disabled="disabled">
+						<%= comment.escape('user_id') %>
+						<span class="glyphicon glyphicon-user"></span>
+					</div>
+				</a>
+				<span>
+					<div class="media-body">
+						<%= comment.escape('body') %>
+					</div>
+				</span>
+				<% var date = new Date(comment.escape('created_at')) %>
+				<% var options = {month: "short", day: "numeric", hour: "numeric", minute: "numeric" }%>
+				<small class="pull-right">
+					<%= date.toLocaleString("en-US", options) %>
+				</small>
+			</div>
+		</li>
+		<% }); %>
 </ul>

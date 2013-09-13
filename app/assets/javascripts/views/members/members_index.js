@@ -41,7 +41,7 @@ TrelloClone.Views.MembersIndex = Backbone.View.extend({
 		that.$('.typeahead').typeahead({
 			name: 'members',
 			prefetch: '/users.json',
-			ttl: 10000
+			ttl: 0
 		});
 		
 		that.$('.typeahead').on('typeahead:autocompleted', function(event, obj){

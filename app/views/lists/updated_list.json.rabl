@@ -13,6 +13,11 @@ child :cards do
 		member.try(:username)
 	end
 	
+	code :avatar_url do |card|
+		member = card.assigned_members.first
+		member.try(:avatar_url)
+	end
+	
 	child :comments do
 		attributes :user_id, :card_id, :body, :created_at
 	end

@@ -3,7 +3,7 @@ class BoardsController < ApplicationController
   respond_to :json
   
   def create
-    @board = Board.new(:title => params[:title], :user_id => params[:user_id])
+    @board = Board.new(:title => params[:title], :user_id => current_user.id)
 
     if @board.save
       render :json => @board

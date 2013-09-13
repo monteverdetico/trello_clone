@@ -8,6 +8,8 @@ TrelloClone.Views.CommentsShow = Backbone.View.extend({
 		"submit #addComment": "createComment"	
 	},
 	
+	className: "container",
+	
 	createComment: function(event) {
 		event.preventDefault();
 		

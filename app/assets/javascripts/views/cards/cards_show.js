@@ -54,12 +54,15 @@ TrelloClone.Views.CardsShow = Backbone.View.extend({
 		that.$el.droppable({
 			accept: ".member",
 			drop: function(event, ui) {
-				var assignedUser, cardAssignment, assignedUserId
-				assignedUser = $(ui.draggable).text().trim();
-				that.model.set({assigned_to: assignedUser});
+				var assignedUser, cardAssignment, assignedUserId, avatar_url
 				
+				assignedUser = $(ui.draggable).text().trim();
 				cardAssignment = that.model.get('card_assignments');
 				assignedUserId = ui.draggable.attr('id').match(/\d/g).join("");
+				avatar_url = $("#member-" + assignedUserId + " img").attr('src');
+				
+				that.model.set({assigned_to: assignedUser});
+				that.model.set({avatar_url: avatar_url})
 				
 				if (cardAssignment.get('user_id')) {
 					cardAssignment.save({user_id: assignedUserId});					

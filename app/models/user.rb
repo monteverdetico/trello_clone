@@ -1,7 +1,7 @@
 require 'bcrypt'
 class User < ActiveRecord::Base
   
-  attr_accessible :email, :session_token, :username, :password
+  attr_accessible :email, :session_token, :username, :password, :avatar_url
   attr_reader :password
   
   validates :password_digest, :presence => { :message => "Password can't be blank" }
@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
                                                 :allow_blank => true }
 
   after_initialize :ensure_session_token
+  after_initialize :ensure_avatar_url
   
   has_many :boards,
            :dependent => :destroy
@@ -29,6 +30,13 @@ class User < ActiveRecord::Base
   has_many :assigned_cards,
            :through => :card_assignments,
            :source => :card
+  
+  def generate_avatar_url
+    if self.email
+      gravatar_id = Digest::MD5.hexdigest(self.email.downcase)
+      "http://gravatar.com/avatar/#{gravatar_id}.png?s=20&d=identicon&r=pg"
+    end
+  end
   
   def self.find_by_credentials(username, password)
     user = User.find_by_username(username)
@@ -59,6 +67,10 @@ class User < ActiveRecord::Base
   private
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
+  end
+  
+  def ensure_avatar_url
+    self.avatar_url ||= self.generate_avatar_url
   end
 end
 

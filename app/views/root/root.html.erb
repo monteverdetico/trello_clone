@@ -7,6 +7,9 @@
 			<ul class="nav navbar-nav">
 				<p class="navbar-text">
 					Signed in as <%= current_user.username %>
+					<span>
+						<img class="img-thumbnail" src="<%= current_user.avatar_url %>">
+					</span>
 				</p>				
 			</ul>
 			<ul class="container nav navbar-nav navbar-right">
@@ -26,6 +29,12 @@
 <div class="col-md-12" id="content">
 </div>
 
+<div id="footer">
+	<div class="container">
+		<p class="text-muted credit">TrelloClone by Marcelo</p>
+	</div>	
+</div>
+	
 <script type="application/json" id="bootstrapped-data">
 	<%= render "data.json", :boards => @boards %>
 </script>

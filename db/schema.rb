@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911204757) do
+ActiveRecord::Schema.define(:version => 20130913163809) do
 
   create_table "board_members", :force => true do |t|
     t.integer  "user_id"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20130911204757) do
     t.string   "session_token",   :null => false
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "avatar_url",      :null => false
   end
 
 end
