@@ -28,5 +28,5 @@ child :lists do
 end
 
 child :members => :members do
-	attributes :id, :username
+	attributes :id, :username, :avatar_url
 end
