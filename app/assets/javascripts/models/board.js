@@ -4,5 +4,9 @@ TrelloClone.Models.Board = Backbone.Model.extend({
 		data.members = new TrelloClone.Collections.Members(data.members);
 
 		return data;
+	},
+	
+	urlRoot: function() {
+		return "/users/" + this.get('user_id') + "/boards"
 	}
 });
