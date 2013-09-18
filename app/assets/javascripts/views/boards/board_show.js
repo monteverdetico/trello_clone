@@ -4,9 +4,9 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		var model = this.model;
 		var lists = model.get('lists');
 
-		this.listenTo(lists, "add", this.swap);
-		this.listenTo(lists, "destroy", this.swap);
-		this.listenTo(this.model, "change", this.swap);		
+		this.listenTo(lists, "add", this.render);
+		this.listenTo(lists, "destroy", this.render);
+		this.listenTo(this.model, "change", this.render);		
 	},
 	
 	events: {
@@ -78,14 +78,6 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
 		});
 		
 		that.$('#sidebar').html(membersView.render().$el);	
-	},
-	
-	swap: function() {
-		_.each(this.childrenViews, function(listView) {
-			listView.leave();
-		});
-		
-		this.render();
 	},
 	
 	_generatePositions: function(listIds) {
