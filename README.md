@@ -1,6 +1,6 @@
-*MarTrello*
+**MarTrello**
 
-MarTrello is an in-progress clone of Trello built with curiousity. 
+*MarTrello* is an in-progress clone of Trello built with curiousity. 
 
 Developed with Ruby on Rails back-end serving a Twitter Bootstrap styled Backbone.js, jQueryUI client-side.
 
